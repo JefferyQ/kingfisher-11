@@ -57,8 +57,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func getData(imageData:String) {
         APIClient.instance.getData(imageData) { (data) in
-            if let response = data["responses"]![0] as? NSDictionary {
-                if let labelAnnot = response["labelAnnotations"] as? NSArray {
+            if let response = data["responses"] as? [NSDictionary] {
+                if let labelAnnot = response[0]["labelAnnotations"] as? NSArray {
                     var descriptions = [(String,Double)]()
                     for label in labelAnnot {
                         if let l = label as? NSDictionary {

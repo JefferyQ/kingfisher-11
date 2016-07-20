@@ -16,12 +16,19 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let closeKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(closeKeyboardGesture)
     }
     
     override func viewDidAppear(animated: Bool) {
         if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil {
             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
+    }
+
+    func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func attemptLogin(sender:UIButton) {
